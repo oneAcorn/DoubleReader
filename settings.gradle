@@ -1,0 +1,3 @@
+include ':commonModule'
+include ':app'
+rootProject.name = "DoubleReader"

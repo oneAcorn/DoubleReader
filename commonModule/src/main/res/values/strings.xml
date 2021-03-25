@@ -1,0 +1,17 @@
+<resources xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingTranslation">
+    <string name="app_name">双语阅读</string>
+    <string name="ok">确定</string>
+    <string name="btn_cancel">取消</string>
+    <string name="tips">提示</string>
+    <string name="no_content_new">暂无内容</string>
+    <string name="load_fail">网络错误</string>
+    <string name="refresh">刷新</string>
+    <string name="server_exception">服务器异常</string>
+    <string name="network_error">网络出现错误</string>
+    <string name="get_data_timeout">请求超时</string>
+    <string name="no_connect_service">无法连接到服务器</string>
+    <string name="common_loading">加载中..</string>
+    <string name="common_find_new_version">发现新版本</string>
+    <string name="common_download">下载</string>
+</resources>
+
