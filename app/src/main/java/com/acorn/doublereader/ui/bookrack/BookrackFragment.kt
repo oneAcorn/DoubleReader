@@ -6,6 +6,7 @@ import android.content.Intent
 import android.net.Uri
 import android.provider.DocumentsContract
 import com.acorn.doublereader.R
+import com.acorn.doublereader.utils.Caches
 import com.base.commonmodule.base.CommonBaseFragment
 import com.base.commonmodule.extend.*
 import com.base.commonmodule.utils.logI
@@ -29,7 +30,9 @@ class BookrackFragment : CommonBaseFragment() {
     override fun initListener() {
         addBookBtn.singleClick {
             requestPermission(Manifest.permission.READ_EXTERNAL_STORAGE, allPermGrantedCallback = {
-                startBookPicker(PICK_FILE_REQUEST_CODE, null)
+                val lastBookUri =
+                    if (Caches.lastBookUriStr.isNullOrEmpty()) null else Uri.parse(Caches.lastBookUriStr)
+                startBookPicker(PICK_FILE_REQUEST_CODE, lastBookUri)
             })
         }
     }
@@ -41,6 +44,7 @@ class BookrackFragment : CommonBaseFragment() {
                 PICK_FILE_REQUEST_CODE -> { //选择书籍
                     val uriStr = data?.dataString
                     val uri = Uri.parse(uriStr)
+                    Caches.lastBookUriStr = uriStr
                     saveFilePermission(uri)
                     logI("sdf")
                 }

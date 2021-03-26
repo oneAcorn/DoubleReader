@@ -1,4 +1,4 @@
-package com.base.commonmodule.utils.cache
+package com.base.commonmodule.utils
 
 import java.lang.reflect.GenericArrayType
 import java.lang.reflect.ParameterizedType
