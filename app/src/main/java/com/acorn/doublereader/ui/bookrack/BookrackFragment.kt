@@ -6,6 +6,8 @@ import android.content.Intent
 import android.net.Uri
 import android.provider.DocumentsContract
 import com.acorn.doublereader.R
+import com.acorn.doublereader.greendao.BookDaoManager
+import com.acorn.doublereader.greendao.BookModel
 import com.acorn.doublereader.utils.Caches
 import com.base.commonmodule.base.CommonBaseFragment
 import com.base.commonmodule.extend.*
@@ -35,6 +37,10 @@ class BookrackFragment : CommonBaseFragment() {
                 startBookPicker(PICK_FILE_REQUEST_CODE, lastBookUri)
             })
         }
+        testBtn1.singleClick {
+            val list=BookDaoManager.instance.dao.loadAll()
+            logI("fdsfas")
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -42,14 +48,34 @@ class BookrackFragment : CommonBaseFragment() {
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
                 PICK_FILE_REQUEST_CODE -> { //选择书籍
-                    val uriStr = data?.dataString
-                    val uri = Uri.parse(uriStr)
-                    Caches.lastBookUriStr = uriStr
-                    saveFilePermission(uri)
-                    logI("sdf")
+                    addBook(data?.dataString)
+//                    BookDaoManager.instance.dao.insert(BookModel(0L,uriStr,))
                 }
             }
         }
+    }
+
+    private fun addBook(uriStr: String?) {
+        uriStr ?: return
+        val uri = Uri.parse(uriStr)
+        Caches.lastBookUriStr = uriStr
+        saveFilePermission(uri)
+        val uriChinese = Uri.decode(uriStr)
+        val nameStartIndex = uriChinese.lastIndexOf('/') + 1
+        val nameEndIndex = uriChinese.lastIndexOf('.')
+        if (nameStartIndex == -1 || nameEndIndex == -1) {
+            showToast("获取书籍名称失败")
+            return
+        }
+        val name = uriChinese.substring(nameStartIndex, nameEndIndex)
+        val type = when (uriChinese.substring(nameEndIndex + 1, uriChinese.length)) {
+            "txt" -> 0
+            "epub" -> 1
+            "pdf" -> 2
+            else -> 0
+        }
+        addBookBtn.text = name
+        BookDaoManager.instance.inserOrReplace(BookModel(null, uriStr, name, "", type))
     }
 
     override fun layoutResId(): Int {

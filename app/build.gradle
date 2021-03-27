@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
+    id 'org.greenrobot.greendao'
 }
 
 android {
@@ -45,6 +46,12 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    greendao {
+        schemaVersion 1
+        daoPackage 'com.acorn.doublereader.greendao.generate'
+        targetGenDir 'src/main/java'
+    }
 }
 
 dependencies {
@@ -67,4 +74,6 @@ dependencies {
     }
     implementation 'org.slf4j:slf4j-android:1.7.25'
     //----------------epublib end-------------------
+
+    implementation 'org.greenrobot:greendao:3.3.0'
 }
