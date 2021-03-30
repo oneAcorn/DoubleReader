@@ -4,15 +4,17 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
-import android.provider.DocumentsContract
 import com.acorn.doublereader.R
 import com.acorn.doublereader.greendao.BookDaoManager
 import com.acorn.doublereader.greendao.BookModel
 import com.acorn.doublereader.utils.Caches
 import com.base.commonmodule.base.CommonBaseFragment
-import com.base.commonmodule.extend.*
-import com.base.commonmodule.utils.logI
+import com.base.commonmodule.extend.requestPermission
+import com.base.commonmodule.extend.saveFilePermission
+import com.base.commonmodule.extend.singleClick
+import com.base.commonmodule.extend.startBookPicker
 import kotlinx.android.synthetic.main.fragment_bookrack.*
+import java.util.*
 
 /**
  * Created by acorn on 2021/3/26.
@@ -37,10 +39,10 @@ class BookrackFragment : CommonBaseFragment() {
                 startBookPicker(PICK_FILE_REQUEST_CODE, lastBookUri)
             })
         }
-        testBtn1.singleClick {
-            val list=BookDaoManager.instance.dao.loadAll()
-            logI("fdsfas")
-        }
+//        testBtn1.singleClick {
+//            val list=BookDaoManager.instance.dao.loadAll()
+//            logI("fdsfas")
+//        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -49,7 +51,6 @@ class BookrackFragment : CommonBaseFragment() {
             when (requestCode) {
                 PICK_FILE_REQUEST_CODE -> { //选择书籍
                     addBook(data?.dataString)
-//                    BookDaoManager.instance.dao.insert(BookModel(0L,uriStr,))
                 }
             }
         }
@@ -75,7 +76,12 @@ class BookrackFragment : CommonBaseFragment() {
             else -> 0
         }
         addBookBtn.text = name
-        BookDaoManager.instance.inserOrReplace(BookModel(null, uriStr, name, "", type))
+        BookDaoManager.instance.inserOrUpdate(BookModel().apply {
+            this.path = uriStr
+            this.name = name
+            this.type = type
+            this.addDate = Date()
+        })
     }
 
     override fun layoutResId(): Int {

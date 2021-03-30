@@ -14,4 +14,9 @@
         android:text="btn1"
         android:textAllCaps="false" />
 
+    <Button
+        android:id="@+id/btn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="btn2" />
 </LinearLayout>

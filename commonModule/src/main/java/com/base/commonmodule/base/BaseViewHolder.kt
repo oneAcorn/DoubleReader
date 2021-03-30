@@ -8,15 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
  */
 abstract class BaseViewHolder<VHD>(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-    open fun update(model: VHD?) {
-
-    }
-
-    open fun update(model: VHD?, position: Int) {
-
-    }
-
-    open fun update(model1: VHD?, model2: VHD?, model3: VHD?, position: Int) {
+    open fun bindData(data: VHD?, position: Int) {
 
     }
 }
