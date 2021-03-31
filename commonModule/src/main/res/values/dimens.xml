@@ -1,5 +1,9 @@
 <resources>
     <dimen name="title_bar_height">@dimen/dp_50</dimen>
+    <dimen name="book_width">90dp</dimen>
+    <dimen name="book_height">120dp</dimen>
+    <dimen name="book_name_text_size">10sp</dimen>
+    <dimen name="book_title_text_size">14sp</dimen>
 
     <dimen name="dp_0">0dp</dimen>
     <dimen name="dp_0_1">0.1dp</dimen>

@@ -7,8 +7,8 @@
 
     <View
         android:id="@+id/bookBgView"
-        android:layout_width="120dp"
-        android:layout_height="160dp"
+        android:layout_width="@dimen/book_width"
+        android:layout_height="@dimen/book_height"
         android:background="@drawable/bg_txt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -16,7 +16,6 @@
 
     <TextView
         android:id="@+id/bookTypeTv"
-        tools:text="txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -24,7 +23,8 @@
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@id/bookBgView"
         app:layout_constraintEnd_toEndOf="@id/bookBgView"
-        app:layout_constraintStart_toStartOf="@id/bookBgView" />
+        app:layout_constraintStart_toStartOf="@id/bookBgView"
+        tools:text="txt" />
 
     <TextView
         android:id="@+id/bookNameTv"
@@ -32,13 +32,15 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp"
-        tools:text="书名书名书名书名书名书"
         android:layout_marginRight="10dp"
+        android:ellipsize="end"
         android:gravity="center_horizontal"
+        android:maxLines="3"
         android:textColor="@color/book_name"
-        android:textSize="16sp"
+        android:textSize="@dimen/book_name_text_size"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="@id/bookBgView"
         app:layout_constraintRight_toRightOf="@id/bookBgView"
-        app:layout_constraintTop_toTopOf="@id/bookBgView" />
+        app:layout_constraintTop_toTopOf="@id/bookBgView"
+        tools:text="书名书名书名书名书名书" />
 </androidx.constraintlayout.widget.ConstraintLayout>

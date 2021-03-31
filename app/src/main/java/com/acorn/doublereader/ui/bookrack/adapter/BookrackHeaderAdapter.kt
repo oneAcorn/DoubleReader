@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.item_bookrack_header_adapter.view.*
 /**
  * Created by acorn on 2021/3/30.
  */
-class BookrackHeaderAdapter(private val data: BookrackHeaderBean?) :
+class BookrackHeaderAdapter(private var data: BookrackHeaderBean?) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val inflater = LayoutInflater.from(BaseApplication.appContext)
     var onAddBookCallback: (() -> Unit)? = null
@@ -51,6 +51,11 @@ class BookrackHeaderAdapter(private val data: BookrackHeaderBean?) :
         if (holder is HeaderBookHolder) {
             holder.bindData(data?.latestReadBooks?.get(position), position)
         }
+    }
+
+    fun setData(newData: BookrackHeaderBean?) {
+        data = newData
+        notifyDataSetChanged()
     }
 
     inner class HeaderBookHolder(itemView: View) : BaseViewHolder<BookModel>(itemView) {

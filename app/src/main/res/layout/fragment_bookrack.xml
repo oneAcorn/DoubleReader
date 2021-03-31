@@ -6,11 +6,21 @@
     android:background="#7DECB4">
 
     <Button
-        android:id="@+id/addBookBtn"
+        android:id="@+id/testBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="添加书籍"
+        android:text="test"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/refreshBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:background="#F4D3B2"
+        android:text="refresh"
+        app:layout_constraintLeft_toRightOf="@id/testBtn"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
@@ -20,5 +30,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/addBookBtn" />
+        app:layout_constraintTop_toBottomOf="@id/testBtn" />
 </androidx.constraintlayout.widget.ConstraintLayout>
