@@ -1,8 +1,6 @@
 package com.base.commonmodule.base
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Message
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +14,6 @@ import com.base.commonmodule.extend.singleClick
 import com.base.commonmodule.network.INetworkUI
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.base_fragment_base_layout.*
-import java.lang.ref.WeakReference
 
 /**
  * Created by acorn on 2020/5/3.
@@ -43,16 +40,19 @@ abstract class CommonBaseFragment : Fragment(), INetworkUI {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        initData()
+        initIntentData()
         initView()
         initListener()
+        initData()
     }
 
-    abstract fun initData()
+    abstract fun initIntentData()
 
     abstract fun initView()
 
     abstract fun initListener()
+
+    abstract fun initData()
 
     override fun onDestroy() {
         super.onDestroy()

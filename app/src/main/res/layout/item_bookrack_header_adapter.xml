@@ -16,6 +16,7 @@
 
     <TextView
         android:id="@+id/bookTypeTv"
+        tools:text="txt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
@@ -23,8 +24,7 @@
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@id/bookBgView"
         app:layout_constraintEnd_toEndOf="@id/bookBgView"
-        app:layout_constraintStart_toStartOf="@id/bookBgView"
-        tools:text="txt" />
+        app:layout_constraintStart_toStartOf="@id/bookBgView" />
 
     <TextView
         android:id="@+id/bookNameTv"
@@ -32,6 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginTop="20dp"
+        tools:text="书名书名书名书名书名书"
         android:layout_marginRight="10dp"
         android:gravity="center_horizontal"
         android:textColor="@color/book_name"
@@ -39,20 +40,5 @@
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="@id/bookBgView"
         app:layout_constraintRight_toRightOf="@id/bookBgView"
-        app:layout_constraintTop_toTopOf="@id/bookBgView"
-        tools:text="书名书名书名书名书名书" />
-
-    <TextView
-        android:id="@+id/bookTitleTv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginRight="5dp"
-        android:textSize="14sp"
-        tools:text="书名书名"
-        android:textColor="@color/book_name"
-        app:layout_constraintLeft_toLeftOf="@id/bookBgView"
-        app:layout_constraintRight_toRightOf="@id/bookBgView"
-        app:layout_constraintTop_toBottomOf="@id/bookBgView" />
+        app:layout_constraintTop_toTopOf="@id/bookBgView" />
 </androidx.constraintlayout.widget.ConstraintLayout>

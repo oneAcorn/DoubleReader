@@ -20,12 +20,16 @@ class BookrackActivity : CommonBaseActivity() {
 
     }
 
-    override fun initData() {
+    override fun initIntentData() {
     }
 
     override fun initView() {
     }
 
     override fun initListener() {
+    }
+
+    override fun initData() {
+
     }
 }

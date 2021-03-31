@@ -26,15 +26,16 @@ abstract class CommonBaseActivity : AppCompatActivity(), INetworkUI {
     override fun setContentView(layoutResID: Int) {
         super.setContentView(R.layout.base_activity_base_layout)
         LayoutInflater.from(this).inflate(layoutResID, baseContentLayout)
-        initData()
+        initIntentData()
         initView()
         initListener()
+        initData()
     }
 
     /**
      * 初始化数据,如通过Intent获取的数据,MVVM的ViewModel的初始化等
      */
-    protected abstract fun initData()
+    protected abstract fun initIntentData()
 
     /**
      *  初始化View
@@ -45,6 +46,8 @@ abstract class CommonBaseActivity : AppCompatActivity(), INetworkUI {
      *  初始化各种监听器
      */
     protected abstract fun initListener()
+
+    protected abstract fun initData()
 
     override fun onDestroy() {
         super.onDestroy()

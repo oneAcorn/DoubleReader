@@ -36,7 +36,6 @@ class BookDaoManager {
     }
 
     fun test(){
-        dao.queryBuilder().where(BookModelDao.Properties.LatestReadDate.notEq(null))
         logI("fff")
     }
 

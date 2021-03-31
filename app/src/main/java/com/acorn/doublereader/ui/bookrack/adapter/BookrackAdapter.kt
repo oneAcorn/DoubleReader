@@ -3,9 +3,12 @@ package com.acorn.doublereader.ui.bookrack.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.acorn.doublereader.R
 import com.acorn.doublereader.base.MyApplication
+import com.acorn.doublereader.bean.BookrackBean
+import com.acorn.doublereader.bean.BookrackHeaderBean
 import com.acorn.doublereader.greendao.BookModel
 import com.base.commonmodule.base.BaseApplication
 import com.base.commonmodule.base.BaseViewHolder
@@ -15,7 +18,8 @@ import kotlinx.android.synthetic.main.item_bookrack_header.view.*
 /**
  * Created by acorn on 2021/3/29.
  */
-class BookrackAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class BookrackAdapter(private val data: BookrackBean?) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val inflater = LayoutInflater.from(BaseApplication.appContext)
 
     companion object {
@@ -32,32 +36,68 @@ class BookrackAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        if (holder is HeaderHolder) {
+            holder.bindData(data?.headerData, position)
+        } else if (holder is BookHolder) {
+            holder.bindData(data?.books?.get(position - 1), position - 1)
+        }
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return 1 + (data?.books?.size ?: 0)
     }
 
     override fun getItemViewType(position: Int): Int {
-        return super.getItemViewType(position)
+        return when (position) {
+            0 -> {
+                ITEM_HEADER
+            }
+            else -> {
+                ITEM_BOOKRACK
+            }
+        }
     }
 
-    inner class HeaderHolder(itemView: View) : BaseViewHolder<Any>(itemView) {
-        val latestReadRv: RecyclerView = itemView.latestReadRv
+    inner class HeaderHolder(itemView: View) : BaseViewHolder<BookrackHeaderBean>(itemView) {
+        private val latestReadRv: RecyclerView = itemView.latestReadRv
 
-        override fun bindData(data: Any?, position: Int) {
+        init {
+            latestReadRv.isFocusableInTouchMode = false
+            latestReadRv.isFocusable = false
+            latestReadRv.layoutManager =
+                LinearLayoutManager(itemView.context, LinearLayoutManager.HORIZONTAL, false)
+
+        }
+
+        override fun bindData(data: BookrackHeaderBean?, position: Int) {
             super.bindData(data, position)
         }
     }
 
     inner class BookHolder(itemView: View) : BaseViewHolder<BookModel>(itemView) {
-        val nameTv = itemView.bookNameTv
-        val typeTv = itemView.bookTypeTv
-        val bgView = itemView.bookBgView
+        private val nameTv = itemView.bookNameTv
+        private val typeTv = itemView.bookTypeTv
+        private val bgView = itemView.bookBgView
+        private val titleTv = itemView.bookTitleTv
 
         override fun bindData(data: BookModel?, position: Int) {
             super.bindData(data, position)
+            nameTv.text = data?.name
+            titleTv.text = data?.name
+            typeTv.text = when (data?.type) {
+                0 -> {
+                    "txt"
+                }
+                1 -> {
+                    "epub"
+                }
+                2 -> {
+                    "pdf"
+                }
+                else -> {
+                    "未知"
+                }
+            }
         }
     }
 }

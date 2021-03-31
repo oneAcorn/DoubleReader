@@ -4,9 +4,12 @@ import android.Manifest
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
+import androidx.recyclerview.widget.GridLayoutManager
 import com.acorn.doublereader.R
+import com.acorn.doublereader.extend.createViewModel
 import com.acorn.doublereader.greendao.BookDaoManager
 import com.acorn.doublereader.greendao.BookModel
+import com.acorn.doublereader.ui.bookrack.adapter.BookrackAdapter
 import com.acorn.doublereader.utils.Caches
 import com.base.commonmodule.base.CommonBaseFragment
 import com.base.commonmodule.extend.requestPermission
@@ -20,15 +23,31 @@ import java.util.*
  * Created by acorn on 2021/3/26.
  */
 class BookrackFragment : CommonBaseFragment() {
+    private val viewModel: BookrackViewModel by lazy { createViewModel(BookrackViewModel::class.java) }
+    private var adapter: BookrackAdapter? = null
 
     companion object {
         const val PICK_FILE_REQUEST_CODE = 2
     }
 
-    override fun initData() {
+    override fun initIntentData() {
+
     }
 
     override fun initView() {
+        rv.isFocusable = false
+        rv.isFocusableInTouchMode = false
+        rv.layoutManager = GridLayoutManager(context, 3).apply {
+            spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                override fun getSpanSize(position: Int): Int {
+                    return if (position == 0)
+                        3
+                    else {
+                        1
+                    }
+                }
+            }
+        }
     }
 
     override fun initListener() {
@@ -45,12 +64,27 @@ class BookrackFragment : CommonBaseFragment() {
 //        }
     }
 
+    override fun initData() {
+        viewModel.commonState.observe(this, this)
+        viewModel.getBookrackLiveData().observe(this, {
+            adapter = BookrackAdapter(it)
+            rv.adapter = adapter
+        })
+
+        refreshData()
+    }
+
+    private fun refreshData() {
+        viewModel.requestBookrack()
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             when (requestCode) {
                 PICK_FILE_REQUEST_CODE -> { //选择书籍
                     addBook(data?.dataString)
+                    refreshData()
                 }
             }
         }

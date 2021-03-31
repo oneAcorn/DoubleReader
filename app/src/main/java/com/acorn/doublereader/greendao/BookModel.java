@@ -26,14 +26,15 @@ public class BookModel {
     //添加书籍时间
     private Date addDate;
 
-    @Generated(hash = 1954819619)
+    @Generated(hash = 179535652)
     public BookModel(Long id, String path, String name, String img, int type,
-            Date latestReadDate, Date addDate) {
+            long readTotalSecond, Date latestReadDate, Date addDate) {
         this.id = id;
         this.path = path;
         this.name = name;
         this.img = img;
         this.type = type;
+        this.readTotalSecond = readTotalSecond;
         this.latestReadDate = latestReadDate;
         this.addDate = addDate;
     }
@@ -111,5 +112,13 @@ public class BookModel {
 
     public void setAddDate(Date addDate) {
         this.addDate = addDate;
+    }
+
+    public long getReadTotalSecond() {
+        return this.readTotalSecond;
+    }
+
+    public void setReadTotalSecond(long readTotalSecond) {
+        this.readTotalSecond = readTotalSecond;
     }
 }
