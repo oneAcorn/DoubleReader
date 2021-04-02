@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.base_activity_base_layout.*
 /**
  * Created by acorn on 2020/5/3.
  */
-abstract class CommonBaseActivity : AppCompatActivity(), INetworkUI {
+open class CommonBaseActivity : AppCompatActivity(), INetworkUI {
     val disposable = CompositeDisposable()
     private val progressDialog: ProgressDialog by lazy { ProgressDialog.newInstance() }
     private var isProgressShowing = false
@@ -35,19 +35,19 @@ abstract class CommonBaseActivity : AppCompatActivity(), INetworkUI {
     /**
      * 初始化数据,如通过Intent获取的数据,MVVM的ViewModel的初始化等
      */
-    protected abstract fun initIntentData()
+    protected open fun initIntentData(){}
 
     /**
      *  初始化View
      */
-    protected abstract fun initView()
+    protected open fun initView(){}
 
     /**
      *  初始化各种监听器
      */
-    protected abstract fun initListener()
+    protected open fun initListener(){}
 
-    protected abstract fun initData()
+    protected open fun initData(){}
 
     override fun onDestroy() {
         super.onDestroy()

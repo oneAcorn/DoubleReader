@@ -8,7 +8,10 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.acorn.doublereader.R
 import com.acorn.doublereader.extend.createViewModel
 import com.acorn.doublereader.ui.bookrack.adapter.BookrackAdapter
+import com.acorn.doublereader.ui.bookrack.viewmodel.BookrackViewModel
+import com.acorn.doublereader.ui.reader.BookDetailActivity
 import com.acorn.doublereader.utils.Caches
+import com.acorn.doublereader.utils.CharsetDetector
 import com.base.commonmodule.base.CommonBaseFragment
 import com.base.commonmodule.extend.requestPermission
 import com.base.commonmodule.extend.saveFilePermission
@@ -25,10 +28,6 @@ class BookrackFragment : CommonBaseFragment() {
 
     companion object {
         const val PICK_FILE_REQUEST_CODE = 2
-    }
-
-    override fun initIntentData() {
-
     }
 
     override fun initView() {
@@ -61,6 +60,20 @@ class BookrackFragment : CommonBaseFragment() {
                     if (Caches.lastBookUriStr.isNullOrEmpty()) null else Uri.parse(Caches.lastBookUriStr)
                 startBookPicker(PICK_FILE_REQUEST_CODE, lastBookUri)
             })
+        }
+        adapter.onBookClickCallback = {
+            var encoding: String? = null
+            if (it?.path?.isNotEmpty() == true) {
+                encoding = CharsetDetector.detectCharset(
+                    requireContext().contentResolver.openInputStream(Uri.parse(it.path))
+                )
+            }
+            showToast("book:${it?.name},$encoding")
+            if (it != null) {
+                startActivity(Intent(context, BookDetailActivity::class.java).apply {
+                    putExtra("book", it)
+                })
+            }
         }
     }
 

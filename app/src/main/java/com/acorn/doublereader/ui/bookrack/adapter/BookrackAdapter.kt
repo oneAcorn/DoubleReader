@@ -12,6 +12,8 @@ import com.acorn.doublereader.bean.BookrackHeaderBean
 import com.acorn.doublereader.greendao.BookModel
 import com.base.commonmodule.base.BaseApplication
 import com.base.commonmodule.base.BaseViewHolder
+import com.base.commonmodule.extend.singleClick
+import com.base.commonmodule.utils.logI
 import kotlinx.android.synthetic.main.item_bookrack_book.view.*
 import kotlinx.android.synthetic.main.item_bookrack_header.view.*
 
@@ -22,6 +24,7 @@ class BookrackAdapter(private var data: BookrackBean?) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val inflater = LayoutInflater.from(BaseApplication.appContext)
     var onAddBookCallback: (() -> Unit)? = null
+    var onBookClickCallback: ((BookModel?) -> Unit)? = null
 
     companion object {
         const val ITEM_HEADER = 1
@@ -88,6 +91,13 @@ class BookrackAdapter(private var data: BookrackBean?) :
         private val typeTv = itemView.bookTypeTv
         private val bgView = itemView.bookBgView
         private val titleTv = itemView.bookTitleTv
+
+        init {
+            itemView.singleClick {
+                logI("position:$adapterPosition")
+                onBookClickCallback?.invoke(data?.books?.get(adapterPosition - 1))
+            }
+        }
 
         override fun bindData(data: BookModel?, position: Int) {
             super.bindData(data, position)

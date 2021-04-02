@@ -46,13 +46,13 @@ abstract class CommonBaseFragment : Fragment(), INetworkUI {
         initData()
     }
 
-    abstract fun initIntentData()
+    protected open fun initIntentData() {}
 
-    abstract fun initView()
+    protected open fun initView() {}
 
-    abstract fun initListener()
+    protected open fun initListener() {}
 
-    abstract fun initData()
+    protected open fun initData() {}
 
     override fun onDestroy() {
         super.onDestroy()
@@ -73,11 +73,11 @@ abstract class CommonBaseFragment : Fragment(), INetworkUI {
 
     protected abstract fun layoutResId(): Int
 
-    protected fun errorLayoutResId(): Int {
+    protected open fun errorLayoutResId(): Int {
         return R.layout.common_net_fail_view
     }
 
-    protected fun nullLayoutResId(): Int {
+    protected open fun nullLayoutResId(): Int {
         return R.layout.common_empty_view
     }
 

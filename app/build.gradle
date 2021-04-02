@@ -76,4 +76,7 @@ dependencies {
     //----------------epublib end-------------------
 
     implementation 'org.greenrobot:greendao:3.3.0'
+
+    //文本文件编码识别
+    implementation 'com.github.albfernandez:juniversalchardet:2.4.0'
 }

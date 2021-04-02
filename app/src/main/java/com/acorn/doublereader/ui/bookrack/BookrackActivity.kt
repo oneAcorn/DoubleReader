@@ -14,22 +14,4 @@ class BookrackActivity : CommonBaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bookrack)
     }
-
-    override fun onConfigurationChanged(newConfig: Configuration) {
-        super.onConfigurationChanged(newConfig)
-
-    }
-
-    override fun initIntentData() {
-    }
-
-    override fun initView() {
-    }
-
-    override fun initListener() {
-    }
-
-    override fun initData() {
-
-    }
 }

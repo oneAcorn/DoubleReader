@@ -23,9 +23,8 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".ui.bookrack.BookrackActivity"
-            android:screenOrientation="portrait" />
+        <activity android:name=".ui.bookrack.BookrackActivity" />
+        <activity android:name=".ui.reader.BookDetailActivity" />
     </application>
 
 </manifest>
