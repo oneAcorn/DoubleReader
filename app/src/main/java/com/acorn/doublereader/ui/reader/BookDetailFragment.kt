@@ -1,11 +1,13 @@
 package com.acorn.doublereader.ui.reader
 
 import android.os.Bundle
+import android.view.View
 import com.acorn.doublereader.R
 import com.acorn.doublereader.extend.createViewModel
 import com.acorn.doublereader.greendao.BookModel
 import com.acorn.doublereader.ui.reader.viewmodel.BookDetailViewModel
 import com.base.commonmodule.base.CommonBaseFragment
+import com.base.commonmodule.utils.logI
 import kotlinx.android.synthetic.main.fragment_book_detail.*
 
 /**
@@ -36,9 +38,14 @@ class BookDetailFragment : CommonBaseFragment() {
         super.initData()
         viewModel.commonState.observe(this, this)
         viewModel.getTxtBookLiveData().observe(this, {
-            testTv.text = it
+            readerView.setText(it)
         })
 
         bookModel?.also { viewModel.loadTxtBook(it) }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        logI("fdsf")
     }
 }
